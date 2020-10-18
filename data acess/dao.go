@@ -3,7 +3,7 @@ package dao
 import (
 	"log"
 
-	. "github.com/GaribDev/Appointy/models"
+	. "github.com/GaribDev/GoTest/models"
 	mgo "gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 )
