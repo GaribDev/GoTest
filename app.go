@@ -6,8 +6,8 @@ import (
 	"log"
 	"net/http"
 
+	. "github.com/GaribDev/GoTest/dao"
 	. "github.com/GaribDev/GoTest/models"
-	. "github.com/GaribDev/GoTest/data acess"
 
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
