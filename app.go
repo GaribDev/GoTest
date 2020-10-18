@@ -1,11 +1,16 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 
+	. "github.com/GaribDev/GoTest/models"
+	. "github.com/GaribDev/GoTest/data acess"
+
 	"github.com/gorilla/mux"
+	"gopkg.in/mgo.v2/bson"
 )
 
 func AllMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +22,18 @@ func FindMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Not implemented yet")
+	defer r.Body.Close()
+	var movie Movie
+	if err := json.NewDecoder(r.Body).Decode(&movie); err != nil {
+		respondWithError(w, http.StatusBadRequest, "Invalid request payload")
+		return
+	}
+	movie.ID = bson.NewObjectId()
+	if err := dao.Insert(movie); err != nil {
+		respondWithError(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	respondWithJson(w, http.StatusCreated, movie)
 }
 
 func UpdateMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
