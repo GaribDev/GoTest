@@ -19,6 +19,7 @@ const (
 	COLLECTION = "movies"
 )
 
+// Establish a connection to database
 func (m *MoviesDAO) Connect() {
 	session, err := mgo.Dial(m.Server)
 	if err != nil {
@@ -27,6 +28,7 @@ func (m *MoviesDAO) Connect() {
 	db = session.DB(m.Database)
 }
 
+// Find list of movies
 func (m *MoviesDAO) FindAll() ([]Movie, error) {
 	var movies []Movie
 	err := db.C(COLLECTION).Find(bson.M{}).All(&movies)

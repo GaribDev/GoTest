@@ -8,10 +8,11 @@ import (
 
 	. "github.com/GaribDev/GoTest/dao"
 	. "github.com/GaribDev/GoTest/models"
-
 	"github.com/gorilla/mux"
 	"gopkg.in/mgo.v2/bson"
 )
+
+var dao = MoviesDAO{}
 
 func AllMoviesEndPoint(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Not implemented yet")
